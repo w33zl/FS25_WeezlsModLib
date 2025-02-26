@@ -450,6 +450,19 @@ function Mod:getHasAdminAccess()
     return self:getIsServerAdmin() or self:getIsFarmAdmin()
 end
 
+--- Returns the current player (convinient wraper for g_localPlayer, but also serves the purpose to make it easy to change if/when Giants decide to rename this object again)
+--- @return table "The current player"
+function Mod:getCurrentPlayer()
+    return g_localPlayer
+    -- return g_currentMission.playerSystem.playersByUserId[g_currentMission.playerUserId]
+end
+
+
+function Mod:getCurrentFarm()
+    local farmId = g_localPlayer.farmId or FarmManager.SPECTATOR_FARM_ID
+    return g_farmManager:getFarmById(farmId)
+end
+
 function Mod:enableDebugMode()
     deprecated("enableDebugMode()", "Log class")
 
